@@ -1,0 +1,34 @@
+{
+  "roles": {
+    "Tailor": {
+      "description": "A professional role that requires high-quality stitching.",
+      "required_skills": ["Stitching"],
+      "passing_thresholds": {
+        "Stitching": {
+          "min_quality_rating": 7,
+          "required_professional_grade": ["Advanced", "Expert"],
+          "raw_pass_required": true
+        }
+      }
+    },
+    "Loader Picker": {
+      "description": "Requires accurate reading of labels.",
+      "required_skills": ["Label Reading"],
+      "passing_thresholds": {
+        "Label Reading": {
+          "min_accuracy": 95
+        }
+      }
+    },
+    "Retail Sales": {
+      "description": "Customer-facing retail associate role requiring neat presentation and greeting.",
+      "required_skills": ["Presentation"],
+      "passing_thresholds": {
+        "Presentation": {
+          "min_overall_total": 13,
+          "no_zero_in": ["Hair_Neatness", "Clothing_Cleanliness", "Greeting_Words"]
+        }
+      }
+    }
+  }
+}

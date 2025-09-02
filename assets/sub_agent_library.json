@@ -1,0 +1,19 @@
+{
+  "sub_agents": [
+    {
+      "agent_name": "StitchingAssessorAgent",
+      "description": "A specialized agent that assesses stitching quality from an image.",
+      "assesses_skills": ["Stitching"]
+    },
+    {
+      "agent_name": "LabelReadingAssessorAgent",
+      "description": "Assesses ability to read and extract information from real-world labels.",
+      "assesses_skills": ["Label Reading"]
+    },
+    {
+      "agent_name": "PresentationAssessorAgent",
+      "description": "Assesses presentation skills (grooming and greeting) for retail/field sales.",
+      "assesses_skills": ["Presentation"]
+    }
+  ]
+}

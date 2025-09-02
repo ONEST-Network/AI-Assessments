@@ -1,0 +1,101 @@
+[
+  {
+    "file_path": "label_dataset/samples/product_001.jpeg",
+    "category": "warehouse",
+    "fields": {
+      "product": "Emergency LED Bulb",
+      "brand": "EVEREADY",
+      "model": "NEO",
+      "wattage": "12W",
+      "color_temperature": "6500K",
+      "features": ["Brightest", "Cool Day Light", "Up to 3 hours of back-up", "Fast Charging"]
+    },
+    "difficulty": "easy",
+    "language_hint": "en",
+    "region": "IN"
+  },
+  {
+    "file_paths": [
+      "label_dataset/samples/beverage_001_front.jpeg",
+      "label_dataset/samples/beverage_001_back.jpeg"
+    ],
+    "category": "beverage",
+    "fields": {
+      "product": "Packaged Drinking Water",
+      "brand": "Bisleri",
+      "variant": "with minerals",
+      "volume": "250ml",
+      "processing": "ozonised"
+    },
+    "difficulty": "easy",
+    "language_hint": "en",
+    "region": "IN"
+  },
+  {
+    "file_paths": [
+      "label_dataset/samples/grocery_001_front.jpeg",
+      "label_dataset/samples/grocery_001_back.jpeg"
+    ],
+    "category": "grocery",
+    "fields": {
+      "product": "Rozana Basmati Rice",
+      "brand": "Daawat",
+      "variant": "Super",
+      "net_weight": "5kg",
+      "features": [
+        "Aged up to 2 years",
+        "Cooked grain upto 13mm",
+        "Medium GI",
+        "Gluten Free"
+      ],
+      "marketer": "LT FOODS",
+      "manufacturer": "LT Foods Limited",
+      "country_of_origin": "Product of India",
+      "barcode": "8901537007116",
+      "customer_care_phone": "1800-572-8881"
+    },
+    "difficulty": "medium",
+    "language_hint": "en",
+    "region": "IN"
+  },
+  {
+    "file_paths": [
+      "label_dataset/samples/grocery_002_front.jpeg",
+      "label_dataset/samples/grocery_002_back.jpeg"
+    ],
+    "category": "condiments",
+    "fields": {
+      "product": "Fresh Tomato Ketchup",
+      "brand": "Kissan",
+      "net_weight": "1.1 kg",
+      "packaging": "Mega Value Pack",
+      "feature": "With 100% Real Tomatoes",
+      "marketer": "Hindustan Unilever Ltd.",
+      "barcode": "8901030921667"
+    },
+    "difficulty": "easy",
+    "language_hint": "en",
+    "region": "IN"
+  },
+  {
+    "file_paths": [
+      "label_dataset/samples/grocery_003_front.jpeg",
+      "label_dataset/samples/grocery_003_back.jpeg"
+    ],
+    "category": "grocery",
+    "fields": {
+      "product": "Select 100% MP Sharbati Atta",
+      "brand": "Aashirvaad",
+      "brand_owner": "ITC Limited",
+      "net_weight": "5.5kg",
+      "tagline": "Rotis Stay Softer For Longer",
+      "ingredients": "Wheat",
+      "marketer": "ITC Limited",
+      "customer_care_contact": "itccares@itc.in",
+      "barcode": "8901725007911"
+    },
+    "difficulty": "easy",
+    "language_hint": "en",
+    "region": "IN"
+  }
+]
