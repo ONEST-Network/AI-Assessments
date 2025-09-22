@@ -467,35 +467,73 @@ def update_quiz_score_and_continue(is_correct: bool, tool_context: ToolContext) 
         return f"Error updating score: {str(e)}"
 
 def retrieve_image_from_path(image_path: str, tool_context: ToolContext) -> str:
-    """Enhanced image retrieval tool with state updates"""
+    """Enhanced image retrieval tool with state updates.
+
+    Supports:
+    - Local filesystem paths
+    - file:// URIs
+    - HTTP/HTTPS URLs (e.g., Google Cloud Storage links)
+    - data: URIs
+    """
     try:
-        if not os.path.exists(image_path):
-            raise FileNotFoundError(f"Image file not found: {image_path}")
-        
-        with open(image_path, "rb") as f:
-            image_data = f.read()
-        
+        if not isinstance(image_path, str) or not image_path.strip():
+            raise ValueError("Empty or invalid image path provided")
+
+        path_str = image_path.strip()
+        image_data = None
+
+        # Remote HTTP(S) URL
+        if path_str.startswith("http://") or path_str.startswith("https://"):
+            resp = requests.get(path_str, timeout=30)
+            resp.raise_for_status()
+            image_data = resp.content
+
+        # file:// URI
+        elif path_str.startswith("file://"):
+            local_path = path_str[7:]
+            if not os.path.exists(local_path):
+                raise FileNotFoundError(f"Image file not found: {local_path}")
+            with open(local_path, "rb") as f:
+                image_data = f.read()
+            # Keep original path for logging; store normalized local path as well
+            path_str = local_path
+
+        # data: URI
+        elif path_str.startswith("data:"):
+            b64_data = path_str.split(",", 1)[-1]
+            image_data = base64.b64decode(b64_data)
+
+        # Local filesystem path
+        else:
+            if not os.path.exists(path_str):
+                raise FileNotFoundError(f"Image file not found: {path_str}")
+            with open(path_str, "rb") as f:
+                image_data = f.read()
+
+        if not image_data:
+            raise ValueError("Failed to load image data from provided path/URL")
+
         # Store image data in tool context
         tool_context.state['image_data'] = image_data
-        tool_context.state['image_path'] = image_path
+        tool_context.state['image_path'] = path_str
         tool_context.state['image_size'] = len(image_data)
-        
+
         # Update interaction history
         if "interaction_history" not in tool_context.state:
             tool_context.state["interaction_history"] = []
-        
+
         tool_context.state["interaction_history"].append({
             "timestamp": datetime.now().isoformat(),
             "type": "image_upload",
-            "content": f"Image uploaded: {image_path}",
+            "content": f"Image uploaded: {path_str}",
             "metadata": {"file_size": len(image_data)}
         })
-        
-        logger.info(f"Retrieved image from path: {image_path}, size: {len(image_data)} bytes")
-        return f"Successfully retrieved image from {image_path} ({len(image_data)} bytes)"
-        
+
+        logger.info(f"Retrieved image from path/URL: {path_str}, size: {len(image_data)} bytes")
+        return f"Successfully retrieved image from {path_str} ({len(image_data)} bytes)"
+
     except Exception as e:
-        logger.error(f"Error retrieving image from path {image_path}: {str(e)}")
+        logger.error(f"Error retrieving image from '{image_path}': {str(e)}")
         raise
 
 def validate_image_data(tool_context: ToolContext) -> str:
@@ -648,12 +686,8 @@ STEP 2: If no assessment is active
 - IF user wants to start: start_skill_assessment → start_label_reading_quiz  
 - IF user wants to complete: complete_skill_assessment
 
-EXAMPLES of ANSWERS that need answer_quiz_question:
-- "Emergency bulb" 
-- "Eveready"
-- "14", "12W", "20"  
-- "packged drinking water"
-- Any product name, brand, number, or descriptive text
+ANSWERS that need answer_quiz_question:
+- Any direct response to the question (product/brand name, a number with unit, or a concise descriptor). Do not restart the quiz when such an answer is provided.
 
 NEVER use start_label_reading_quiz if quiz is already running!
 </tool_selection_logic>
@@ -663,11 +697,9 @@ WORKFLOW when user provides an answer:
 1. Call answer_quiz_question with user's answer
 2. Tool returns JSON with evaluation data (user_answer, expected_answer, etc.)
 3. Use your intelligence to evaluate if the answer is correct:
-   - ACCEPT: Case differences ("eveready" = "EVEREADY"), minor spelling variations  
-   - ACCEPT: Brand name variations ("Daawat" = "dawat", "Bisleri" = "bisleri")
-   - REJECT: Major content differences ("emergency bulb" ≠ "Emergency LED Bulb")
-   - REJECT: Wrong numbers ("12W" ≠ "60W", "250ml" ≠ "500ml") 
-   - BE GENEROUS with reasonable variations, STRICT with completely different answers
+   - For brand/product text: accept only trivial formatting differences (case, whitespace, hyphens, periods). Optionally accept a single-character typo (Levenshtein distance == 1) that does not produce a different valid word or a different brand/product name. Otherwise, mark as incorrect.
+   - For numeric/unit fields: the numeric value must match. Allow trivial formatting differences (spacing, case, trailing period). Treat different numbers or incompatible units as incorrect.
+   - Be generous only with trivial formatting or a single harmless character error; be strict when the meaning or identity differs.
 4. Call update_quiz_score_and_continue with your evaluation (true/false)
 5. Tool returns next question data or completion message
 6. Display feedback to user: "Correct!" or "Not quite, the answer was [expected]"
@@ -1118,7 +1150,7 @@ class A2AServer:
         @self.app.route('/.well-known/agent-card.json', methods=['GET'])
         def a2a_agent_card():
             """Return A2A Agent Card according to A2A protocol specification"""
-            base_url = request.url_root.rstrip('/') + "/a2a/rpc"
+            base_url = request.url_root.rstrip('/')
             card = {
                 "capabilities": {
                     "pushNotifications": False,
@@ -1253,16 +1285,18 @@ class A2AServer:
             # Format A2A response with proper parts (using cleaned text)
             response_parts = await self._format_a2a_response_parts(clean_response_text, context_id)
 
+            # Return a single Message object as result per A2A schema
             return ok({
-                "message": {
-                    "role": "agent",
-                    "parts": response_parts,
-                    "messageId": str(uuid.uuid4())
-                },
-                "contextId": context_id,
-                "status": {
-                    "state": status,
-                    "timestamp": datetime.now().isoformat()
+                "kind": "message",
+                "message_id": str(uuid.uuid4()),
+                "role": "agent",
+                "parts": response_parts,
+                "context_id": context_id,
+                "metadata": {
+                    "status": {
+                        "state": status,
+                        "timestamp": datetime.now().isoformat()
+                    }
                 }
             })
 
@@ -1364,16 +1398,18 @@ class A2AServer:
                     base_url = request.url_root.rstrip('/')
                     for img_path in image_paths:
                         if img_path:
-                            uri = f"{base_url}/{img_path.replace('label_dataset/', 'label-media/')}"
+                            uri = f"{base_url}/{img_path.replace('label_dataset/', 'label-media/') }"
                             parts.append({
-                                "type": "FilePart",
-                                "mediaType": "image/jpeg", 
-                                "uri": uri
+                                "kind": "file",
+                                "file": {
+                                    "uri": uri,
+                                    "mimeType": "image/jpeg"
+                                }
                             })
             
             # Add text part
             parts.append({
-                "type": "TextPart",
+                "kind": "text",
                 "text": response_text
             })
             
@@ -1381,7 +1417,7 @@ class A2AServer:
             
         except Exception as e:
             logger.error(f"Error formatting A2A response: {e}")
-            parts = [{"type": "TextPart", "text": response_text}]
+            parts = [{"kind": "text", "text": response_text}]
         
         return parts
 

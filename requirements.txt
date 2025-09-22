@@ -5,6 +5,9 @@ pillow
 requests
 streamlit
 uvicorn[standard]
+a2a-sdk
+starlette
+sse-starlette
 
 # WhatsApp Integration
 flask

@@ -1,0 +1,197 @@
+[
+  {
+    "skill": "Basic Info Gathering",
+    "modules": [
+      {
+        "id": "basic_user_info",
+        "title": "Tell Me About You",
+        "summary": "Quick questions to help me give you the best advice for your situation."
+      }
+    ]
+  },
+  {
+    "skill": "General Interview Skills",
+    "modules": [
+      {
+        "id": "tell_me_about_yourself",
+        "title": "Tell Me About Yourself",
+        "summary": "How to introduce yourself in interviews and make a good first impression."
+      },
+      {
+        "id": "personal_background",
+        "title": "Personal and Family Questions",
+        "summary": "How to answer questions about your family and personal background professionally."
+      },
+      {
+        "id": "company_motivation",
+        "title": "Why This Company",
+        "summary": "How to show interest in the company and explain why you want to work there."
+      },
+      {
+        "id": "salary_expectations",
+        "title": "Salary and Benefits",
+        "summary": "How to discuss salary expectations and negotiate benefits confidently."
+      },
+      {
+        "id": "strengths_weaknesses",
+        "title": "Strengths and Weaknesses",
+        "summary": "How to talk about your good points and areas you want to improve."
+      },
+      {
+        "id": "career_goals",
+        "title": "Future Plans and Goals",
+        "summary": "How to discuss your career goals and where you see yourself in 5 years."
+      }
+    ]
+  },
+  {
+    "skill": "General Interview Assessment",
+    "modules": [
+      {
+        "id": "tell_me_about_yourself_test",
+        "title": "Tell Me About Yourself - Practice Test",
+        "summary": "Practice answering this question and get feedback on your response."
+      },
+      {
+        "id": "personal_background_test",
+        "title": "Family Questions - Practice Test",
+        "summary": "Practice answering questions about your family and background."
+      },
+      {
+        "id": "company_motivation_test",
+        "title": "Why This Company - Practice Test",
+        "summary": "Practice explaining why you want to work for a company."
+      }
+    ]
+  },
+  {
+    "skill": "Store Worker",
+    "modules": [
+      {
+        "id": "customer_service",
+        "title": "Customer Service Skills",
+        "summary": "How to help customers and handle difficult situations."
+      },
+      {
+        "id": "cash_handling",
+        "title": "Cash and Payment Handling",
+        "summary": "Safe and accurate money handling procedures."
+      },
+      {
+        "id": "product_knowledge",
+        "title": "Product Knowledge",
+        "summary": "How to learn about products and help customers find what they need."
+      }
+    ]
+  },
+  {
+    "skill": "Driver",
+    "modules": [
+      {
+        "id": "vehicle_safety",
+        "title": "Vehicle Safety and Maintenance",
+        "summary": "Basic vehicle checks and safe driving practices."
+      },
+      {
+        "id": "navigation_skills",
+        "title": "Navigation and Route Planning",
+        "summary": "How to find locations and plan efficient routes."
+      },
+      {
+        "id": "customer_interaction",
+        "title": "Professional Customer Service",
+        "summary": "How to interact professionally with passengers or delivery customers."
+      }
+    ]
+  },
+  {
+    "skill": "Electrician",
+    "modules": [
+      {
+        "id": "safety_basics",
+        "title": "Electrical Safety Basics",
+        "summary": "Core safety principles every electrician must follow."
+      },
+      {
+        "id": "wiring_fundamentals",
+        "title": "Wiring Fundamentals",
+        "summary": "Basics of conductors, gauges, joints, and terminations."
+      },
+      {
+        "id": "circuit_protection",
+        "title": "Circuit Protection Devices",
+        "summary": "Fuses, MCBs, RCD/RCBOs and selection basics."
+      },
+      {
+        "id": "earthing_bonding",
+        "title": "Earthing and Bonding",
+        "summary": "Grounding methods, bonding conductors, and safety principles."
+      },
+      {
+        "id": "conduit_and_cabling",
+        "title": "Conduit and Cabling Practices",
+        "summary": "Conduit types, bending, pulling cable, and fill considerations."
+      },
+      {
+        "id": "motors_and_controls",
+        "title": "Motors and Basic Controls",
+        "summary": "Motor nameplates, starters, contactors, and overload protection."
+      },
+      {
+        "id": "troubleshooting_basics",
+        "title": "Troubleshooting and Fault Finding",
+        "summary": "Systematic diagnosis, common faults, and safety during testing."
+      },
+      {
+        "id": "lighting_circuits",
+        "title": "Lighting Circuits and Fixtures",
+        "summary": "Switch loops, 3-way/2-way switching, and fixture types."
+      }
+    ]
+  },
+  {
+    "skill": "Fitter",
+    "modules": [
+      {
+        "id": "mechanical_safety",
+        "title": "Mechanical Safety Fundamentals",
+        "summary": "Essential safety practices for mechanical work and shop operations."
+      },
+      {
+        "id": "measurement_tools",
+        "title": "Measurement and Marking Tools",
+        "summary": "Using calipers, micrometers, height gauges, and marking tools accurately."
+      },
+      {
+        "id": "cutting_and_shaping",
+        "title": "Cutting and Shaping Techniques",
+        "summary": "Hand tools, machine tools, filing, and finishing operations."
+      },
+      {
+        "id": "joining_methods",
+        "title": "Joining and Fastening Methods",
+        "summary": "Bolts, nuts, screws, welding basics, and permanent/removable joints."
+      },
+      {
+        "id": "machine_maintenance",
+        "title": "Basic Machine Maintenance",
+        "summary": "Lubrication, cleaning, inspection, and preventive maintenance practices."
+      },
+      {
+        "id": "assembly_techniques",
+        "title": "Assembly and Fitting Operations",
+        "summary": "Alignment, tolerances, clearances, and proper assembly sequences."
+      },
+      {
+        "id": "troubleshooting_mechanical",
+        "title": "Mechanical Troubleshooting",
+        "summary": "Identifying common mechanical problems and systematic fault finding."
+      },
+      {
+        "id": "workshop_practices",
+        "title": "Workshop Practices and Materials",
+        "summary": "Material properties, heat treatment basics, and workshop organization."
+      }
+    ]
+  }
+]

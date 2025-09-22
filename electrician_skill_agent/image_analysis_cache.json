@@ -1,0 +1,22 @@
+{
+  "ElectricianAssessment/img1.png": {
+    "correct_answer": "unsafe",
+    "explanation": "The image shows exposed wires without proper connectors or insulation. This is unsafe because it creates a risk of electrical shock and fire.",
+    "question": "Look at the image. Is the practice shown safe or unsafe?"
+  },
+  "ElectricianAssessment/img2.png": {
+    "correct_answer": "unsafe",
+    "explanation": "The blue wire is not properly connected; the exposed conductor poses a safety risk. All conductors should be fully inserted into the wire connector.",
+    "question": "Look at the image. Is the practice shown safe or unsafe?"
+  },
+  "ElectricianAssessment/img3.png": {
+    "correct_answer": "unsafe",
+    "explanation": "It is unsafe because the person is barefoot, which increases the risk of electric shock.",
+    "question": "Look at the image. Is the practice shown safe or unsafe?"
+  },
+  "ElectricianAssessment/img4.png": {
+    "correct_answer": "safe",
+    "explanation": "The electrician is wearing gloves, which provides a basic level of protection against electrical shock. Therefore, the practice is considered safe.",
+    "question": "Look at the image. Is the practice shown safe or unsafe?"
+  }
+}
